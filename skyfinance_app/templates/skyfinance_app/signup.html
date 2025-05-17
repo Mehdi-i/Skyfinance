@@ -1,0 +1,77 @@
+
+{% extends 'skyfinance_app/base.html' %}
+
+{% block content %}
+
+<div class = 'main-container'>
+    <div class = 'signup-container'>
+        <h1>Register</h1>
+        <form method = 'post' action = '{% url "signup" %}' autocomplete = 'off'>
+            {% csrf_token %}
+            <div class = 'form-control'>
+                <label for = 'username'>Username</label>
+                <div class = 'field-icon'>
+                    {{ form.username }}
+                    <img src = "/static/skyfinance_app/images/user.svg" alt = 'user-icon' class = 'icon'>
+                </div>
+                <div class = 'error'>
+                    {{ form.username.errors }}
+                </div>
+            </div>
+
+            <div class = 'form-control'>
+                <label for = 'Custom-dob'>Date of Birth</label>
+                <div class = 'field-icon'>
+                    {{ form.date_of_birth }}
+                </div>
+                <div class = 'error'>
+                    {{ form.date_of_birth.errors }}
+                </div>
+            </div>
+
+            <div class = 'form-control'>
+                <label for = 'Custom-email-field'>Email Address</label>
+                <div class = 'field-icon'>
+                    {{ form.email }}
+                    <img src = "/static/skyfinance_app/images/email-address.svg" alt = 'email-icon' class = 'icon'>
+                </div>
+                <div class = 'error'>
+                    {{ form.email.errors }}
+                </div>
+            </div>
+
+            <div class = 'form-control'>
+                <label for = 'Custom-password-field-1'>Password</label>
+                <div class = 'field-icon'>
+                    {{ form.password1 }}
+                    <img src = "/static/skyfinance_app/images/password.svg" alt = 'password-icon' class = 'icon'>
+                </div>
+                <div class = 'error'>
+                    {{ form.password1.errors }}
+                </div>
+            </div>
+            
+            <div class = 'form-control'>
+                <label for = 'Custom-password-field-2'>Confirm Password</label>
+                <div class = 'field-icon'>
+                    {{ form.password2 }}
+                    <img src = "/static/skyfinance_app/images/password.svg" alt = 'password-icon' class = 'icon'>
+                </div>
+                <div class = 'error'>
+                    {{ form.password2.errors }}
+                </div>
+            </div>
+
+            <button type = 'submit'>Register</button>
+
+            <div class = 'error'>
+                {{ form.non_field_errors }}
+            </div>
+            
+            <p class = 'redirect'>Already a member? <a href = '{% url "login" %}'>Sign in</a></p>
+            
+        </form>
+    </div>
+</div>
+
+{% endblock %}

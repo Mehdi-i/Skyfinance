@@ -1,0 +1,38 @@
+
+{% extends 'skyfinance_app/base.html' %}
+
+{% block content %}
+
+<div class = 'main-container'>
+    <div class = 'email-verification'>
+
+        <div class = 'instructions'>
+            <img src = '/static/skyfinance_app/images/lock.svg' alt = 'lock'>
+            <h1>Trouble logging in?</h1>
+            <p>Enter your email and we'll send you a link to get back into your account, as soon as possible.</p>
+        </div>
+
+        <form method = 'post' action = '{% url "email_verification" %}' autocomplete = 'off'>
+            {% csrf_token %}
+
+            <div class = 'form-control'>
+                <label for = 'Custom-email-field'>Email Address</label>
+                <div class = 'field-icon'>
+                    {{ form.email }}
+                    <img src = "/static/skyfinance_app/images/email-address.svg" alt = 'email-icon' class = 'icon'>
+                </div>
+                <div class = 'error'>
+                    {{ form.email.errors }}
+                </div>
+            </div>
+
+            <button type = 'submit'>Send login link</button>
+
+            <div class = 'error'>
+                {{ form.non_field_errors }}
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

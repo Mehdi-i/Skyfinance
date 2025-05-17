@@ -1,0 +1,161 @@
+
+{% extends 'skyfinance_app/base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href='{% static "skyfinance_app/overview.css" %}'>
+{% endblock %}
+
+{% block content %}
+
+<div class = 'main-container'>
+
+    <section class = 'hero'>
+        <h1>See Where Your <span style = 'color: #598C58;'>Money</span> Goes. Take Charge Without the Stress.</h1>
+        <p>Skyfinance breaks down your finances, so you can focus on what matters.</p>
+        <a href = '{% url "signup" %}'><button>Let us help!</button></a>
+    </section>
+
+    <div class = 'section-container'>
+        <section class = 'features'>
+            <h2>Features</h2>
+            <div class = 'card-grid'>
+
+                <div class = 'feature-card'>
+                    <div class = 'feature-card-inner'>
+                        <div class = 'feature-card-front'>
+                            <div class = 'icon'><img src = '{% static "skyfinance_app/images/graphs.svg" %}' alt = 'graphs'></div>
+                            <h3>Tailored Graphs</h3>
+                        </div>
+                        <div class = 'feature-card-back'>
+                        <p>Visualize your spending in real-time, putting your spending habits into perspective.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class = 'feature-card'>
+                    <div class = 'feature-card-inner'>
+                        <div class = 'feature-card-front'>
+                            <div class = 'icon'><img src = '{% static "skyfinance_app/images/charts.svg" %}' alt = 'charts'></div>
+                            <h3>Categorical Charts</h3>
+                        </div>
+                        <div class = 'feature-card-back'>
+                            <p>Cleanly separate your concerns and know exactly where your money goes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class = 'feature-card'>
+                    <div class = 'feature-card-inner'>
+                        <div class = 'feature-card-front'>
+                            <div class = 'icon'><img src = '{% static "skyfinance_app/images/coin.svg" %}' alt = 'coin'></div>
+                            <h3>Customized Tips</h3>
+                        </div>
+                        <div class = 'feature-card-back'>
+                            <p>Harnessing the power of AI get penny pinching tips to better your financial situation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class = 'feature-card'>
+                    <div class = 'feature-card-inner'>
+                        <div class = 'feature-card-front'>
+                            <div class = 'icon'><img src = '{% static "skyfinance_app/images/time.svg" %}' alt = 'time'></div>
+                            <h3>Weekly Reminders</h3>
+                        </div>
+                        <div class = 'feature-card-back'>
+                            <p>Receive a weekly Email summarizing your spending history for that week</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class = 'about-us'>
+            <h2>About us</h2>
+            <div class = about-us-grid>
+                <div class = 'about-us-portrait'>
+                    <img src = '{% static "skyfinance_app/images/aboutus-cover.svg" %}' alt = 'cover'>
+                </div>
+
+                <div class = 'about-us-paragraph'>
+                    <p style = 'text-align: center;'><i>I will spend smarter next month.<br>
+                    It's just 20$, No big deal.<br>
+                    I worked hard this week, I deserve to splurge.</i></p>
+                    <p>How many times have we caught ourselves in this loop? We justify, we delay, we convince ourselves that next time will be different. 
+                    Maybe it's just a coffee here, a spontaneous order there — no big deal, right? Until the end of the month arrives, 
+                    and we're left wondering where it all went. Again.</p>
+                    <p>But here's the thing: it's not just about money. It's about the mental load — the stress, the guilt, the constant background 
+                    hum of “I should be better at this.” And when you're juggling life, work, responsibilities, it's easy to push your finances 
+                    to the back of your mind… until they demand your attention.</p>
+                    <p>This is where Skyfinance steps in. We’re not here to shame you or throw charts in your face. We're here to support you — 
+                    to give you clarity, perspective, and a plan. We help you take back control, one small habit at a time, with tools designed 
+                    to meet you exactly where you are.</p>
+                    <p>You don’t need to do it alone. We walk with you through every win, every setback, every breakthrough. 
+                    You've trusted us with your financials, and we take that seriously. Because at the end of the day, this isn’t just about budgeting — 
+                    it’s about freedom, peace of mind, and building a life that feels lighter.</p>
+                </div>
+        </section>
+
+        <section class = 'reviews'>
+            <h2>Testimonials</h2>
+            <div class = 'testimonials-slider'>
+                <div class = 'slides testimonial-slide-1'>
+                    <div class = 'testimonial'>
+                        <address class = 'testimonial-author'>
+                            <img src = '{% static "skyfinance_app/images/john.png" %}' alt = 'John Wick' class = 'testimonial-photo'>
+                            <h6 class = 'author-name'>John Wick</h6>
+                        </address>
+                        <div class = 'slide-text'>
+                            <p class = testimonial-text><i>This app seriously saved me. I was drowning in bills, no idea where my money went. Now I track everything, 
+                            cut unnecessary spending, and for the first time in years — I’m not living paycheck to paycheck.</i></p>
+                        </div>      
+                    </div>
+                </div>
+
+                <div class = 'slides testimonial-slide-2'>
+                    <div class = 'testimonial'>
+                        <address class = 'testimonial-author'>
+                            <img src = '{% static "skyfinance_app/images/arthur.png" %}' alt = 'Arthur Morgan' class = 'testimonial-photo'>
+                            <h6 class = 'author-name'>Arthur Morgan</h6>
+                        </address>
+                        <div class = 'slide-text'>
+                            <p class = 'testimonial-text'>Thanks to this app, I finally feel in control. I’m not just surviving anymore — 
+                            I’m saving, planning, and living with peace of mind.</p>
+                        </div>
+                            
+                    </div>
+                </div>
+
+                <div class = 'slides testimonial-slide-3'>
+                    <div class = 'testimonial'>
+                        <address class = 'testimonial-author'>
+                            <img src = '{% static "skyfinance_app/images/kennedy.png" %}' alt = 'Leon S.Kennedy' class = 'testimonial-photo'>
+                            <h6 class = 'author-name'>Leon S.Kennedy</h6>
+                        </address>
+                        <div class = 'slide-text'>
+                            <p class = testimonial-text><i>Before using this app, my finances felt like a mess. Now I know exactly 
+                            where my money is going — and more importantly, where it's staying.</i></p>
+                        </div>      
+                    </div>
+                </div>
+                
+                <div class="testimonial-controls">
+                    <button class="previous-testimonial">←</button>
+                    <button class="next-testimonial">→</button>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <section class = 'footer'>
+        <p>© 2025 Skyfinance. All rights reserved.</p>
+    </section>
+
+</div>
+
+<script src="{% static 'skyfinance_app/javascript/testimonial-caroussel.js' %}"></script>
+
+{% endblock %}

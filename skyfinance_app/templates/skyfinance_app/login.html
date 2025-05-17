@@ -1,0 +1,51 @@
+
+
+{% extends 'skyfinance_app/base.html' %}
+
+{% block content %}
+
+<div class = 'main-container'>
+    <div class = 'login-container'>
+        <h1>Sign in</h1>
+        <form method = 'post' action = '{% url "login" %}' autocomplete = 'off'>
+            {% csrf_token %}
+
+            <div class = 'form-control'>
+                <label for = 'Custom-email-field'>Email Address</label>
+                <div class = 'field-icon'>
+                    {{ form.email }}
+                    <img src = "/static/skyfinance_app/images/email-address.svg" alt = 'email-icon' class = 'icon'>
+                </div>
+                <div class = 'error'>
+                    {{ form.email.errors }}
+                </div>
+            </div>
+
+            <div class = 'form-control'>
+                <label for = 'Custom-password-field'>Password</label>
+                <div class = 'field-icon'>
+                    {{ form.password }}
+                    <img src = "/static/skyfinance_app/images/password.svg" alt = 'password-icon' class = 'icon'>
+                </div>
+                <div class = 'error'>
+                    {{ form.password.errors }}
+                </div>
+            </div>
+
+            <button type = 'submit'>Sign in</button>
+            
+            <div class = 'forgot-password'>
+                <a href = '{% url "email_verification" %}'>Forgot your password?</a>
+            </div>
+
+            <div class = 'error'>
+                {{ form.non_field_errors }}
+            </div>
+            
+            <p class = 'redirect'>Don't have an account? <a href = '{% url "signup" %}'>Register</a></p>
+            
+        </form>
+    </div>
+</div>
+
+{% endblock %}
