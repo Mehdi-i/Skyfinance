@@ -1,0 +1,56 @@
+
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        p {
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button, a {
+            padding: 10px;
+            width: 100px;
+            margin: 10px;
+            color: green;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            border: 1px solid black;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        button:hover, a:hover {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="{% url 'delete_transaction' transaction.pk %}">
+        {% csrf_token %}
+        <h1>Are you sure you want to delete {{ transaction }}?</h1>
+        <p>Transactions Deleted Will Be Refunded to Your Balance Accordingly.</p>
+        <div class = 'button-group'>
+            <a href="{% url 'dashboard' %}">Cancel</a>
+            <button type="submit">Yes</button>
+        </div>
+    </form>
+</body>
+</html>

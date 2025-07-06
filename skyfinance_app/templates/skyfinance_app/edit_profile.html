@@ -1,0 +1,52 @@
+
+{% extends 'skyfinance_app/navigation.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class = "secondary-container">
+        <div class = 'profile-container'>
+            <h1>Configure Profile</h1>
+            <form method = "post" enctype = "multipart/form-data" action = "{% url 'settings' %}">
+                {% csrf_token %}
+
+                <div class = 'profile-picture-container'>
+                    <label for = "profilePicInput">
+                        <img id = "profilePicPreview" 
+                            src = "{% if request.user.profile_picture %}{{ request.user.profile_picture.url }}{% else %}/static/skyfinance_app/images/user-profile.svg{% endif %}" 
+                            width = "200" 
+                            height = "200" 
+                            alt = "Profile Picture" 
+                            class = "profile-pic">
+                    </label>
+                    <input id = "profilePicInput" type = "file" name = "profile_picture" accept = "image/*" hidden>
+
+                    <input type = "checkbox" name = "remove_profile_picture" id = "removePicCheckbox" hidden>
+                    <button type = "button" id = "removePicBtn">Remove Picture</button>
+
+                    <div class = "errors">{{ form.profile_picture.errors }}</div>
+                </div>
+
+                <div class = 'input-container'>
+                    <div class = 'form-control'>
+                        <label for = "{{ form.username.id_for_label }}">Username</label>
+                        {{ form.username }}
+                        <div class = "errors">{{ form.username.errors }}</div>
+                    </div>
+
+                    <div class = 'form-control'>
+                        <label for = "balance">Balance</label>
+                        {{ form.balance }}
+                        <div class = "errors">{{ form.balance.errors }}</div>
+                    </div>
+                </div>
+
+                <a href = "{% url 'password_change' %}">Change Password</a><br>
+                
+                <button type = "submit" class = 'update'>Edit Profile</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

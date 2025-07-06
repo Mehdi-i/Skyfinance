@@ -1,0 +1,127 @@
+
+{% extends 'skyfinance_app/navigation.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class = 'greeting'>
+            <h1>Welcome Back {{ request.user }}</h1>
+            <div class = 'transaction-grid'>
+                <div class = 'labels'>
+                    <p>
+                        Current Balance: <br>
+                        Total Income: <br>
+                        Total Expense:
+                    </p>
+                </div>
+                <div class = 'values'>
+                    <p>
+                        &ensp; &ensp;{{balance}} &ensp; <a href = '{% url "settings" %}' style = 'font-size: 12px; font-style: oblique; color: rgb(7, 132, 132);'>Update</a><br>
+                        &ensp; &ensp;{{income}} <br>
+                        &ensp; &ensp;{{expense}} <br>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    <div class = 'main-container'>
+        <div class = 'query-transactions-container'>
+            <h2>All Transactions</h2>
+            <form method = 'get' class = 'filter-form'>
+                <div class = 'select-options'>
+                    <div class = 'select-pair'>
+                        <label for = 'transaction_type'>Transaction type</label>
+                        <select name = 'type' id = 'transaction_type'>
+                            {% for value, label in transaction_type_choices %}
+                                <option value="{{ value }}" {% if request.GET.type == value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class = 'select-pair'>
+                        <label for = 'transaction_category'>Transaction category</label>
+                        <select name = 'category' id = 'transaction_category'>
+                            {% for value, label in transaction_categories %}
+                            <option value = "{{ value }}" {% if request.GET.category == value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class = 'date-options'>
+                    <div class = 'date-pair'>
+                        <label for = 'transaction_date_start'>From date</label>
+                        <input type = 'date' name = 'start_date' value = '{{ request.GET.start_date }}' id = 'transaction_date_start'>
+                    </div>
+                    <div class = 'date-pair'>
+                        <label for = 'transaction_date_end'>To date</label>
+                        <input type = 'date' name = 'end_date' value = '{{ request.GET.end_date }}' id = 'transaction_date_end'>
+                    </div>
+                </div>
+                <div class = 'submit'>
+                    <button type = 'submit'>Filter</button>
+                    <a href = '{% url "dashboard" %}' class = 'reset-filters'>Reset filters</a>
+                </div>
+            </form>
+            
+            {% if page_object %}
+                <div class = "accordion-container">
+                    {% for transaction in page_object %}
+                        <details class = "transaction-card">
+                            <summary>
+                                {{ transaction.transaction_type|title }}
+                                <span class = 'summary-right'>{{ transaction.amount }}</span>
+                            </summary>
+                            <div class = "transaction-details">
+                                {% if transaction.transaction_type == "expense" %}
+                                    <p><span>Category:</span> &ensp; {{ transaction.category|title }}</p>
+                                {% endif %}
+                                <p><span>Date:</span> &ensp; {{ transaction.transaction_date }}</p>
+                                {% if transaction.memo %}
+                                    <p><span>Note:</span> &ensp; {{ transaction.memo }}</p>
+                                {% endif %}
+                                <div class = 'action'>
+                                    <a href = "{% url 'edit_transaction' transaction.pk %}">Edit</a>
+                                    <a href = "{% url 'delete_transaction' transaction.pk %}">Delete</a>
+                                </div>
+                            </div>
+                        </details>
+                    {% endfor %}
+                    <div class = 'add'>
+                        <a href = '{% url "add_transaction" %}'>+ Add Transaction</a>
+                    </div>
+                </div>
+                <div class = 'pagination'>
+                    page {{ page_object.number }} of {{ page_object.paginator.num_pages}}
+                    {% if page_object.has_previous %}
+                        <a href = "?page=1&type={{ request.GET.type }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}">
+                        First</a>
+                    {% endif %}
+                    <div class = numbers>       
+                    {% for page_num in custom_page_range %}
+                        {% if page_num == page_object.number %}
+                            <span class = 'current'>{{ page_num }}</span>
+                        {% else %}
+                            <a href="?page={{ page_num }}&type={{ request.GET.type }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}">
+                            {{ page_num }}</a>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+
+                    {% if page_object.has_next %}
+                        <a href = "?page={{ page_object.paginator.num_pages }}&type={{ request.GET.type }}&start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}">
+                        Last</a>
+                    {% endif %}
+                </div>
+
+            {% elif no_result and filter %}
+                <p class = 'no-result'>No result matching the filters was found.</p>        
+
+            {% else %}
+                <div class = 'add'  style = "margin-left: 20px;">
+                        <a href = '{% url "add_transaction" %}'>+ Add Transaction</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+{% endblock %}

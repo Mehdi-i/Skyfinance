@@ -1,0 +1,52 @@
+
+{% extends 'skyfinance_app/navigation.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class = "secondary-container">
+        <div class = "transactions-container">
+            <h1>Add a Transaction</h1>
+            <form method = "post" action = "{% url 'add_transaction' %}">
+                {% csrf_token %}
+
+                <div class = "form-control">
+                    <label for = "transaction_type">Transaction Type</label>
+                    {{ add_transaction_form.transaction_type }}
+                    <div class = "errors">{{ add_transaction_form.transaction_type.errors }}</div>
+                </div>
+
+                <div class = "form-control" id = 'category-field'>
+                    <label for = "transaction_type">Expense Category</label>
+                    {{ add_transaction_form.category }}
+                    <div class = "errors">{{ add_transaction_form.category.errors }}</div>
+                </div>
+
+                <div class = "form-control">
+                    <label for = "amount">Amount</label>
+                    {{ add_transaction_form.amount }}
+                    <div class = "errors">{{ add_transaction_form.amount.errors }}</div>
+                </div>
+
+                <div class = "form-control">
+                    <label for = "transaction_date">Date</label>
+                    {{ add_transaction_form.transaction_date }}
+                    <div class = "errors">{{ add_transaction_form.transaction_date.errors }}</div>
+                </div>
+
+                <div class = "form-control">
+                    <label for = "memo">Memo</label>
+                    <div class = "memo-wrapper">
+                        {{ add_transaction_form.memo }}
+                        <span id = "charCount">0/50</span>
+                    </div>
+                    <div class = "errors">{{ form.memo.errors }}</div>
+                </div>
+
+                <button type = "submit">Add Transaction</button>
+            </form>
+        </div>
+    </div>
+    
+{% endblock %}

@@ -1,6 +1,5 @@
 
 from pathlib import Path
-from django.urls import reverse_lazy
 import os
 from dotenv import load_dotenv
 
@@ -19,7 +18,7 @@ SECRET_KEY = os.getenv('secret_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.69.114', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -56,6 +55,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'skyfinance_project.context_processors.user_profile_picture',
             ],
         },
     },
@@ -105,6 +105,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = [
     BASE_DIR / "skyfinance_app" / "static",
@@ -118,14 +120,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "skyfinance_app.CustomUser" 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.getenv('email')
-EMAIL_HOST_PASSWORD = os.getenv('password')
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-LOGIN_URL = reverse_lazy('login')
-
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+LOGIN_URL = 'login'

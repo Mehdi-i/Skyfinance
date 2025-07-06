@@ -1,0 +1,55 @@
+
+{% extends 'skyfinance_app/navigation.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class = "secondary-container">
+        <div class = "transactions-container">
+            <h1>Update Transaction</h1>
+            <form method = "post" action = "{% url 'edit_transaction' transaction.pk %}">
+                {% csrf_token %}
+
+                <input type="hidden" name = "form_type" value = "transaction">
+
+                <div class = "form-control">
+                    <label for = "transaction_type">Transaction Type</label>
+                    {{ form.transaction_type }}
+                    <div class = "errors">{{ form.transaction_type.errors }}</div>
+                </div>
+
+                <div class = "form-control" id = 'category-field'>
+                    <label for = "transaction_category">Expense Category</label>
+                    {{ form.category }}
+                    <div class = "errors">{{ form.category.errors }}</div>
+                </div>
+
+                <div class = "form-control">
+                    <label for = "amount">Amount</label>
+                    {{ form.amount }}
+                    <div class = "errors">{{ form.amount.errors }}</div>
+                </div>
+
+                <div class = "form-control">
+                    <label for = "transaction_date">Date</label>
+                    {{ form.transaction_date }}
+                    <div class = "errors">{{ form.transaction_date.errors }}</div>
+                </div>
+
+                <div class = "form-control">
+                    <label for = "memo">Memo</label>
+                    <div class = "memo-wrapper">
+                        {{ form.memo }}
+                        <span id = "charCount">0/50</span>
+                    </div>
+                    <div class = "errors">{{ form.memo.errors }}</div>
+                </div>
+
+                <button type = "submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+    <script src = "{% static 'skyfinance_app/javascript/new-transaction.js' %}"></script>
+
+{% endblock %}

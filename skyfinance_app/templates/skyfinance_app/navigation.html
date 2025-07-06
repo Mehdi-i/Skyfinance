@@ -1,0 +1,38 @@
+
+{% load static %}
+
+<html>
+    <head>
+        <meta charset = 'utf-8'>
+        <meta name = 'viewport' content = 'width = device = width, initial-scale = 1.0, maximum-scale=1.0'>
+        <link rel="stylesheet" href="{% static 'skyfinance_app/navigation.css' %}">
+        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+        {% block extra_css %} {% endblock %}
+    </head>
+    <body>
+        <nav class = "navbar">
+            <a href = "{% url 'dashboard' %}">Dashboard</a>
+            
+            <div class = 'profile-wrapper'>
+                <img 
+                    id = "profileDropdownToggle" 
+                    src = "{% if profile_picture %}{{ request.user.profile_picture.url }}{% else %}/static/skyfinance_app/images/user-profile.svg{% endif %}" 
+                    width = "128" 
+                    height = "128" 
+                    alt = "user-profile" 
+                    class = "profile-picture">
+
+                <div class = 'dropdown-menu' id = 'profileDropdownMenu'>
+                    <a href = '{% url "settings" %}'>Settings</a>
+                    <form method = 'post' action = "{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type = 'submit' class = "logout">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        {% block content %} {% endblock %}
+        <script src = "{% static 'skyfinance_app/javascript/dashboard.js' %}"></script>
+    </body>
+</html>

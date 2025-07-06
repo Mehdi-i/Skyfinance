@@ -190,7 +190,8 @@ label {
     justify-content: center;
     height: 50%;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    padding: 20px;
 }
 
 @media screen and (min-width: 300px) and (max-width: 600px) {
